@@ -11,6 +11,12 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes, Userstamps;
 
+
+    protected $dispatchesEvents = [
+        'created' => \App\Events\OrderCreation::class,
+    ];
+
+
     public function transactions(){
         return $this->hasMany(Transaction::class,'order_id','id');
     }

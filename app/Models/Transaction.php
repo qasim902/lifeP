@@ -13,6 +13,10 @@ class Transaction extends Model
 
     protected $table= 'transactions';
 
+
+
+
+
     public function product(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Product::class,'id','product_id');

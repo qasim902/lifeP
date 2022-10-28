@@ -58,4 +58,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected $dispatchesEvents = [
+        'created' => \App\Events\UserRegisteredEvent::class,
+    ];
 }
