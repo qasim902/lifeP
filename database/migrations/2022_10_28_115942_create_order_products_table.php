@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('order_id')->unsigned()->index();
-//            $table->bigInteger('product_id')->unsigned()->index();
-//            $table->double('quantity', 5, 2);
+            $table->bigInteger('product_id')->unsigned()->index();
+            $table->double('quantity', 5, 2);
+            $table->double('price', 10, 2);
+            $table->double('tax', 10, 2)->nullable();
+            $table->double('total', 10, 2);
             $table->bigInteger('created_by')->nullable()->unsigned()->index();
             $table->bigInteger('updated_by')->nullable()->unsigned()->index();
             $table->timestamps();
@@ -25,9 +28,8 @@ return new class extends Migration
 
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
-//            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('order_id')->references('id')->on('orders');
-
         });
     }
 
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('order_products');
     }
 };

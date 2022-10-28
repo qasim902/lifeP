@@ -17,7 +17,8 @@ class Order extends Model
     ];
 
 
-    public function transactions(){
+    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Transaction::class,'order_id','id');
     }
 }
