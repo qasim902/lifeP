@@ -13,18 +13,14 @@ class Transaction extends Model
 
     protected $table= 'transactions';
 
-
-
-
-
-    public function product(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(Product::class,'id','product_id');
-    }
-
-
+    protected $fillable = ['order_id','total','user_id'];
     public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Order::class,'id','order_id');
+        return $this->belongsTo(Order::class,'order_id','id');
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(User::class,'id','user_id');
     }
 }

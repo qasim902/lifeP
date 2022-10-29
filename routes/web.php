@@ -26,13 +26,44 @@ Route::get('/', function () {
 });
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
+    'auth',
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function (Request $request) {
-        // $request->session()->flash('flash.banner', 'Yay it works!');
 
+    Route::group(['prefix' => 'users','as' => 'users-'],function(){
+        Route::get('/',[\App\Http\Controllers\UserController::class,'index'])->name('index');
+        Route::post('/',[\App\Http\Controllers\UserController::class,'addOrEditOrder'])->name('store');
+        Route::get('/show/{id?}',[\App\Http\Controllers\UserController::class,'show'])->name('show');
+        Route::get('/{id}',[\App\Http\Controllers\UserController::class,'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'orders','as' => 'orders-'],function(){
+        Route::get('/',[\App\Http\Controllers\OrderController::class,'index'])->name('index');
+        Route::post('/',[\App\Http\Controllers\OrderController::class,'addOrEditOrder'])->name('store');
+        Route::get('/show/{id?}',[\App\Http\Controllers\OrderController::class,'show'])->name('show');
+        Route::get('/{id}',[\App\Http\Controllers\OrderController::class,'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'products','as' => 'products-'],function(){
+        Route::get('/',[\App\Http\Controllers\ProductController::class,'index'])->name('index');
+        Route::post('/',[\App\Http\Controllers\ProductController::class,'addOrEditProduct'])->name('store');
+        Route::get('/show/{id?}',[\App\Http\Controllers\ProductController::class,'show'])->name('show');
+        Route::get('/{id}',[\App\Http\Controllers\ProductController::class,'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'transactions','as' => 'transactions-'],function(){
+        Route::get('/',[\App\Http\Controllers\TransactionController::class,'index'])->name('index');
+        Route::post('/',[\App\Http\Controllers\TransactionController::class,'addOrEditTransaction'])->name('store');
+        Route::get('/show/{id?}',[\App\Http\Controllers\TransactionController::class,'show'])->name('show');
+        Route::get('/{id}',[\App\Http\Controllers\TransactionController::class,'delete'])->name('delete');
+        Route::get('toggle/{id}',[\App\Http\Controllers\TransactionController::class,'toggleStatus'])->name('toggle');
+    });
+
+    Route::get('/dashboard', function (Request $request) {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+
+

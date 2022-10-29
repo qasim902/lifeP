@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
 class TransactionUpdated
 {
@@ -25,6 +26,7 @@ class TransactionUpdated
      */
     public function handle($event)
     {
+        Log::info('transaction updated');
 //        send email here
     }
 }

@@ -12,7 +12,8 @@ class Product extends Model
     use HasFactory, SoftDeletes, Userstamps;
     protected $table = 'products';
 
-    public function transactions(){
+    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
         return $this->hasManyThrough(Order::class,Transaction::class,'product_id','id','id','order_id');
     }
 }
