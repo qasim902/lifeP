@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class UserService
@@ -13,12 +14,14 @@ class UserService
     public function saveUser($data)
     {
         $data = $this->checkPassword($data);
+        $data['api_token'] = Str::random(60);
         User::create($data);
     }
 
     public function updateUser($id, $data)
     {
         $data = $this->checkPassword($data);
+        $data['api_token'] = Str::random(60);
         User::where('id', $id)->update($data);
     }
 
