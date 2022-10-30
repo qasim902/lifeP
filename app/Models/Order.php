@@ -18,6 +18,11 @@ class Order extends Model
     ];
 
 
+    public function orderProducts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OrderProduct::class,'order_id','id');
+    }
+
     public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Transaction::class, 'order_id', 'id');

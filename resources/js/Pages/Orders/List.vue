@@ -60,7 +60,6 @@ const deleteOrder = (id) => {
                             <th>Price</th>
                             <th>Tax</th>
                             <th>Total</th>
-                            <th>Products</th>
                             <th>Transactions</th>
                             <th>Actions</th>
                         </tr>
@@ -76,7 +75,6 @@ const deleteOrder = (id) => {
                             <td>{{ order.price }}</td>
                             <td>{{ order.tax }}</td>
                             <td>{{ order.total }}</td>
-                            <td>{{ order.products.length }}</td>
                             <td>{{ order.transactions.length }}</td>
                             <td>
                                 <SecondaryButton @click="openEditOrderPage(order.id)"  class="mr-2">

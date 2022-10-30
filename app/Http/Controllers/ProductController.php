@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function index(Request $request,$flash = null)
     {
-        $products = Product::get();
+        $products = $this->productService->getAllProducts();
         if($flash){
             $request->session()->flash('flash.banner', $flash);
         }

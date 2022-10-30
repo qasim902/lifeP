@@ -7,6 +7,13 @@ use Inertia\Inertia;
 
 class ProductService
 {
+    public function getAllProducts(){
+        return Product::get();
+    }
+
+    public function getProduct($id){
+        return Product::find($id);
+    }
 
     public function saveProduct($data)
     {
@@ -26,7 +33,7 @@ class ProductService
     public function showForm($id = null)
     {
         if ($id) {
-            $product = Product::find($id);
+            $product = $this->getProduct($id);
         } else {
             $product = new Product;
         }

@@ -6,7 +6,6 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -20,7 +19,7 @@ class OrderController extends Controller
 
     public function index(Request $request,$flash = null)
     {
-        $orders = Order::with('transactions','user','products')->get();
+        $orders = $this->orderService->getAllOrders();
         if($flash){
             $request->session()->flash('flash.banner', $flash);
         }

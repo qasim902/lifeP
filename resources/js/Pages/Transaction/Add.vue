@@ -67,6 +67,7 @@ const submitForm = () => {
                                 <multiselect
                                     id="order"
                                     v-model="form.order_id"
+                                    :close-on-select="true"
                                     :options="options">
                                 </multiselect>
                                 <InputError :message="form.errors.order_id" class="mt-2"/>
